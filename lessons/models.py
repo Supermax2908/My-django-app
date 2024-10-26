@@ -46,4 +46,4 @@ class LessonComment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.comment
+        return f'Коментарій від {self.user} для "{self.lesson}"'
