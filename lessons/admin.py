@@ -18,10 +18,10 @@ class LessonCategoryAdmin(admin.ModelAdmin):
     
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_filter = ('uiid', 'tag', 'category', 'author', 'user', 'topic', 'created_at')
-    ordering = ('topic',)
-    fields = ('uiid', 'tag', 'category', 'author', 'user', 'topic', 'description', 'cash', 'payment')
-    readonly_fields = ('uiid', 'created_at')
+    list_display = ('topic', 'author', 'user', 'cash', 'payment', 'created_at', 'updated_at')
+    list_filter = ('author', 'user', 'category', 'payment')
+    search_fields = ('topic', 'author__username', 'user__username') 
+    ordering = ('topic', 'author', 'user')
     
 @admin.register(LessonComment)
 class LessonCommentAdmin(admin.ModelAdmin):
