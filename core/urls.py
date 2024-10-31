@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter 
 from lessons.viewsets import LessonViewSet, LessonCommentViewSet
+from message_author.viewsets import MessageUserViewSet
+from questions_answers.viewsets import QuestionViewSet, AnswerViewSet
 
 router = DefaultRouter() 
 
 router.register('lessons', LessonViewSet) 
-router.register('lesson_comments', LessonCommentViewSet) 
+router.register('lesson_comments', LessonCommentViewSet)
+router.register('messageusers', MessageUserViewSet)
+router.register('questions', QuestionViewSet)
+router.register('answers', AnswerViewSet)
                                                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                                                   
 urlpatterns = [
