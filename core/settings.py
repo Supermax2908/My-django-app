@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     
     'lessons',
     'profil',
-    'orders'
+    'orders',
+    'questions_answers',
+    'message_author'
 ]
 
 MIDDLEWARE = [
