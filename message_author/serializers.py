@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, CharField, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from .models import MessageUser
 from django.contrib.auth.models import User
 
@@ -8,8 +8,8 @@ class UserSerializer(ModelSerializer):
         fields = ['username']
     
 class MessageUserSerializer(ModelSerializer):
-    author = PrimaryKeyRelatedField(queryset=User.objects.all())
-    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
+    author = SlugRelatedField(slug_field='username', queryset=User.objects.all())
     
     class Meta: 
         model = MessageUser

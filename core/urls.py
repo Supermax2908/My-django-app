@@ -20,6 +20,7 @@ from rest_framework.routers import DefaultRouter
 from lessons.viewsets import LessonViewSet, LessonCommentViewSet
 from message_author.viewsets import MessageUserViewSet
 from questions_answers.viewsets import QuestionViewSet, AnswerViewSet
+from orders.viewsets import OrderViewSet
 
 router = DefaultRouter() 
 
@@ -28,6 +29,7 @@ router.register('lesson_comments', LessonCommentViewSet)
 router.register('messageusers', MessageUserViewSet)
 router.register('questions', QuestionViewSet)
 router.register('answers', AnswerViewSet)
+router.register('orders', OrderViewSet)
                                                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                                                   
 urlpatterns = [

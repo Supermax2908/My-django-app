@@ -20,7 +20,6 @@ class Order(models.Model):
         with transaction.atomic():
             self.total_price = sum(op.cash for op in self.order_lessons.all())
             self.save()
-            print(f"Updated total price for Order: {self.total_price}")
 
     def __str__(self):
         return f"Замовлення {self.uuid} {self.user.username} {self.total_price}"
@@ -40,4 +39,3 @@ class OrderLesson(models.Model):
 @receiver(post_save, sender=OrderLesson)
 def update_order_total_price(sender, instance, **kwargs):
     instance.order.update_total_price()
-    print(f"Order total price updated to: {instance.order.total_price}")

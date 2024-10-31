@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, CharField, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from .models import LessonTag, LessonCategory, Lesson, LessonComment
 from django.contrib.auth.models import User
 
@@ -20,8 +20,8 @@ class LessonCategorySerializer(ModelSerializer):
 class LessonSerializer(ModelSerializer):
     category = LessonCategorySerializer()
     tag = LessonTagSerializer()
-    author = PrimaryKeyRelatedField(queryset=User.objects.all())
-    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
+    author = SlugRelatedField(slug_field='username', queryset=User.objects.all())
     
     class Meta: 
         model = Lesson 
@@ -39,7 +39,7 @@ class LessonSerializer(ModelSerializer):
     
 class LessonCommentSerializer(ModelSerializer): 
     lesson = LessonSerializer()
-    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
     class Meta: 
         model = LessonComment 
         fields = [ 'id', 'user', 'lesson', 'comment', 'created_at']
