@@ -6,6 +6,24 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_superuser:
+            return self.queryset
+        else:
+            return self.queryset.filter(user=self.request.user)
+    
 class AnswerViewSet(viewsets.ModelViewSet): 
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+    # authentication_classes = []
+    # permission_classes = []
+    
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_superuser:
+            return self.queryset
+        else:
+            return self.queryset.filter(user=self.request.user)

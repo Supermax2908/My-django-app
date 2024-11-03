@@ -21,6 +21,7 @@ from lessons.viewsets import LessonViewSet, LessonCommentViewSet
 from message_author.viewsets import MessageUserViewSet
 from questions_answers.viewsets import QuestionViewSet, AnswerViewSet
 from orders.viewsets import OrderViewSet
+from rest_framework.authtoken import views as authtoken_views
 
 router = DefaultRouter() 
 
@@ -29,10 +30,10 @@ router.register('lesson_comments', LessonCommentViewSet)
 router.register('messageusers', MessageUserViewSet)
 router.register('questions', QuestionViewSet)
 router.register('answers', AnswerViewSet)
-router.register('orders', OrderViewSet)
-                                                                                                                                                                                                                                                                  
+router.register('orders', OrderViewSet)                                                                                                                                                                                             
                                                                                                                                                                                                                                                                   
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('api-token-auth/', authtoken_views.obtain_auth_token)
 ]

@@ -1,8 +1,7 @@
-from orders.models import Order, OrderLesson
-from rest_framework.serializers import ModelSerializer, SlugRelatedField
+from .models import Order, OrderLesson
+from rest_framework.serializers import ModelSerializer, SlugRelatedField, HiddenField, CurrentUserDefault
 from lessons.serializers import LessonSerializer
 from lessons.models import Lesson
-from django.contrib.auth.models import User
 
 class OrderLessonViewSerializer(ModelSerializer):
     lesson = LessonSerializer()
@@ -23,7 +22,7 @@ class OrderLessonSerializer(ModelSerializer):
 
 
 class OrderSerializer(ModelSerializer):
-    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
+    user = HiddenField(default=CurrentUserDefault())
     order_lessons = OrderLessonSerializer(many=True)
 
     class Meta:

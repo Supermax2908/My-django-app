@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from .models import Question, Answer
 from django.contrib.auth.models import User
 
@@ -8,7 +8,7 @@ class UserSerializer(ModelSerializer):
         fields = ['username']
     
 class QuestionSerializer(ModelSerializer):
-    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
     
     class Meta: 
         model = Question
@@ -16,8 +16,8 @@ class QuestionSerializer(ModelSerializer):
         
         
 class AnswerSerializer(ModelSerializer):
-    user = PrimaryKeyRelatedField(queryset=User.objects.all())
-    answerer = PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = SlugRelatedField(slug_field='username', queryset=User.objects.all())
+    answerer = SlugRelatedField(slug_field='username', queryset=User.objects.all())
     
     class Meta:
         model=Answer
