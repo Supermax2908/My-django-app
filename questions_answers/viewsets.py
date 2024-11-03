@@ -17,8 +17,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class AnswerViewSet(viewsets.ModelViewSet): 
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
-    # authentication_classes = []
-    # permission_classes = []
     
     def get_queryset(self):
         user = self.request.user
