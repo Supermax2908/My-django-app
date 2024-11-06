@@ -6,7 +6,7 @@ from .filters import LessonFilterSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 class LessonViewSet(viewsets.ModelViewSet): 
-    queryset = Lesson.objects.all() 
+    queryset = Lesson.objects.all() .select_related('category').order_by('uiid')
     serializer_class = LessonSerializer
     
     permission_classes = []
