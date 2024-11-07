@@ -23,6 +23,7 @@ from questions_answers.viewsets import QuestionViewSet, AnswerViewSet
 from orders.viewsets import OrderViewSet
 from rest_framework.authtoken import views as authtoken_views
 from .views import hello_world, index
+from telegram.views import telegram
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -62,5 +63,6 @@ urlpatterns = [
     path('hello-world', hello_world),
     path("graphql", GraphQLView.as_view(graphiql=True)),
     path("", index, name='index'),
-    path("accounts/", include("allauth.urls"))
+    path("accounts/", include("allauth.urls")),
+    path('telegram', telegram),
 ]

@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     "graphene_django",
     'celery',
     'sqlalchemy',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google', 
+    'allauth.socialaccount.providers.github',
     
     'lessons',
     'profil',
@@ -62,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -183,10 +189,10 @@ CELERY_BEAT_SCHEDULE = {
 
 CELERY_RESULT_BACKEND = 'db+postgresql://maks.buzovskii:postgres@localhost/celery_db'
 
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
-# CELERY_TIMEZONE = 'UTC'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 
 GRAPHENE = {
     "SCHEMA": "core.schema.schema"
@@ -228,3 +234,5 @@ LOGGING = {
         }
     }
 }
+
+SITE_ID = 1
