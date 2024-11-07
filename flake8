@@ -1,0 +1,6 @@
+[flake8]
+# Exclude the virtual environment and migrations directories
+exclude =
+    .venv,
+    migrations
+max-line-length = 120

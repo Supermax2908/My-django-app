@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     "graphene_django",
+    'celery',
+    'sqlalchemy',
     
     'lessons',
     'profil',
@@ -98,7 +100,8 @@ DATABASES = {
         "PORT": "5408",
     }
 }
-
+DATABASES['default']['TEST'] = { 'NAME': 'test_idea_hub', 'DEPENDENCIES': ['public'], 
+                                'MIRROR': 'default', 'MIGRATE': True, 'SERIALIZE': False, 'AUTOCOMMIT': True, }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -154,6 +157,37 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+
+
+CELERY_BEAT_SCHEDULE = {
+    'report_orders_total': {
+        'task': 'orders.tasks.update_orders_total_report',
+        # every 60 seconds
+        'schedule': 10.0,
+        # every day at 00:00
+        # 'schedule': "crontab(hour=0, minute=0)",
+        # cron syntax
+        # 'schedule': "0 0 * * *",
+    },
+    'test_celery': {
+        'task': 'orders.tasks.test_celery',
+        # every 60 seconds
+        'schedule': 1.0,
+    },
+}
+
+CELERY_RESULT_BACKEND = 'db+postgresql://maks.buzovskii:postgres@localhost/celery_db'
+
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'UTC'
+
+GRAPHENE = {
+    "SCHEMA": "core.schema.schema"
 }
 
 # SESSION_COOKIE_AGE = 30
