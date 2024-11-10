@@ -18,8 +18,8 @@ class LessonCategoryAdmin(admin.ModelAdmin):
     
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'author', 'user', 'cash', 'payment', 'created_at', 'updated_at')
-    list_filter = ('author', 'user', 'category', 'payment')
+    list_display = ('topic', 'author', 'user', 'cash', 'is_paid', 'created_at', 'updated_at')
+    list_filter = ('author', 'user', 'category', 'is_paid')
     search_fields = ('topic', 'author__username', 'user__username') 
     ordering = ('topic', 'author', 'user')
     

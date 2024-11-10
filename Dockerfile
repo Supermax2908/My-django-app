@@ -1,7 +1,7 @@
 import random
 from time import sleep
 
-from hillelDjango4.celery import app
+from core.celery import app
 from telegram.models import TelegramUserAccount
 from telegram.service import send_telegram_message
 from orders.reporter import report_orders, report_order_stats

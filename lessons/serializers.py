@@ -25,7 +25,7 @@ class LessonSerializer(ModelSerializer):
     
     class Meta: 
         model = Lesson 
-        fields = ['uiid', 'tag', 'category', 'author', 'topic', 'description', 'user', 'cash', 'payment', 'created_at'] 
+        fields = ['uiid', 'tag', 'category', 'author', 'topic', 'description', 'user', 'cash', 'is_paid', 'created_at'] 
         
     def create(self, validated_data): 
         tag_data = validated_data.pop('tag') 

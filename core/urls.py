@@ -62,7 +62,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('hello-world', hello_world),
     path("graphql", GraphQLView.as_view(graphiql=True)),
-    path("", index, name='index'),
+    path("index/", index, name='index'),
     path("accounts/", include("allauth.urls")),
     path('telegram', telegram),
 ]

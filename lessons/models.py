@@ -25,8 +25,8 @@ class Lesson(models.Model):
     description = models.TextField(default=None)
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_lessons', default=None)
-    cash = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
-    payment = models.BooleanField(default=False)
+    cash = models.IntegerField()
+    is_paid = models.BooleanField(default=False)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
